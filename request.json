@@ -1,0 +1,156 @@
+{
+  "calculationId": 0,
+  "countries": "191",
+  "insuredAges": "30",
+  "isPaid": false,
+  "isSent": false,
+  "isDownloaded": false,
+  "isAnnuled": false,
+  "policyLink": null,
+  "policyDocId": null,
+  "policyDocNo": null,
+  "guid": null,
+  "price": 0,
+  "returnUrl": null,
+  "iFrameTail": null,
+  "currency": null,
+  "id": 28734,
+  "insuranceSumId": 2,
+  "insurerFirstName": null,
+  "insurerLastName": null,
+  "insurerPhone": null,
+  "insurerEmail": null,
+  "insurerBirthDate": null,
+  "insurerPassportSeries": null,
+  "insurerPassportNo": null,
+  "isFullYear": false,
+  "startDate": null,
+  "endDate": null,
+  "days": 8,
+  "listCountryId": [
+    191
+  ],
+  "listTouristAge": [
+    30
+  ],
+  "calculation": {
+    "id": 0,
+    "orderId": 0,
+    "price": 0,
+    "externalId": null,
+    "insuranceCompanyId": 0
+  },
+  "listTourist": [
+    {
+      "birthDate": null,
+      "firstName": null,
+      "lastName": null,
+      "passportSeries": null,
+      "passportNo": null
+    }
+  ],
+  "listAddOption": [
+    {
+      "isSelected": false,
+      "selectedSum": 0,
+      "id": 11,
+      "sums": [
+        500,
+        1000,
+        2000
+      ],
+      "sortId": 1
+    },
+    {
+      "isSelected": false,
+      "selectedSum": 0,
+      "id": 6,
+      "sums": [
+        5000,
+        10000,
+        15000,
+        20000,
+        50000,
+        100000
+      ],
+      "sortId": 5
+    },
+    {
+      "isSelected": false,
+      "selectedSum": 0,
+      "id": 8,
+      "sums": [
+        1000,
+        3000,
+        5000,
+        10000
+      ],
+      "sortId": 10
+    },
+    {
+      "isSelected": false,
+      "selectedSum": 0,
+      "id": 5,
+      "sums": [
+        0
+      ],
+      "sortId": 15
+    },
+    {
+      "isSelected": false,
+      "selectedSum": 0,
+      "id": 9,
+      "sums": [
+        0
+      ],
+      "sortId": 20
+    },
+    {
+      "isSelected": false,
+      "selectedSum": 0,
+      "id": 10,
+      "sums": [
+        0
+      ],
+      "sortId": 25
+    },
+    {
+      "isSelected": false,
+      "selectedSum": 0,
+      "id": 67,
+      "sums": [
+        0
+      ],
+      "sortId": 30
+    },
+    {
+      "isSelected": false,
+      "selectedSum": 0,
+      "id": 68,
+      "sums": [
+        0
+      ],
+      "sortId": 35
+    },
+    {
+      "isSelected": false,
+      "selectedSum": 0,
+      "id": 69,
+      "sums": [
+        0
+      ],
+     "sortId": 40
+    },
+    {
+      "isSelected": false,
+      "selectedSum": 0,
+      "id": 31,
+      "sums": [
+        300,
+        500
+      ],
+      "sortId": 45
+    }
+  ],
+  "partnerId": 1
+}
