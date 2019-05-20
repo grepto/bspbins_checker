@@ -1,11 +1,9 @@
 import os
-from dotenv import load_dotenv
-
 import requests
 import datetime
 import json
-
 import smtplib
+from dotenv import load_dotenv
 from email.mime.text import MIMEText
 from email.header import Header
 
@@ -13,25 +11,24 @@ from email.header import Header
 def insurance_single_quote_get(insurance_company_id = 10):
     start_date = datetime.date.today() + datetime.timedelta(5)
     end_date = start_date + datetime.timedelta(7)
-
     start_date = start_date.strftime('%Y-%m-%d')
     end_date = end_date.strftime('%Y-%m-%d')
 
+    url = 'https://strahovki24.ru/TravelNew/insuranceSingleQuoteGet'
+
     with open('request.json', 'r') as request_file:
         data = json.load(request_file)
-
     data['startDate'] = start_date
     data['endDate'] = end_date
     json_string = json.dumps(data)
-
-    url = 'https://strahovki24.ru/TravelNew/insuranceSingleQuoteGet'
     payload = {
         'insuranceCompanyId': insurance_company_id,
         'json': json_string
     }
 
     try:
-        response = requests.post(url, data=payload)
+        response = requests.post(url, data=payload, timeout=30)
+        response.raise_for_status()
         response_json = json.loads(response.text)
         is_ok = response_json.get('isOk')
         insurance_price = response_json.get('data').get('insurancePrice') if is_ok else 0
@@ -41,10 +38,13 @@ def insurance_single_quote_get(insurance_company_id = 10):
             result_text = 'Нулевая цена полиса'
         else:
             result_text = response_json.get('resultText')
+
+    except requests.exceptions.ReadTimeout as e:
+        is_ok = False
+        result_text = 'Connection timeout'
     except:
         is_ok = False
         result_text = 'Ошибка выполнения запроса'
-
     return is_ok, result_text
 
 
@@ -73,7 +73,7 @@ def email_send(emails, subject, body_text):
     except smtplib.SMTPResponseException as e:
         return e.smtp_code, e.smtp_error
 
-    return True
+    return 200,
 
 
 if __name__ == '__main__':
@@ -95,22 +95,11 @@ if __name__ == '__main__':
     for id, name in insurance_companies.items():
         is_ok, result_text = insurance_single_quote_get(id)
         if not is_ok:
-            checklist.append((name, is_ok, result_text))
+            checklist.append((name, result_text))
 
     if len(checklist) > 0:
         mail_text = 'Ошибка расчета котировки в одной или нескольких СК на сайте https://strahovki24.ru/\n\n'
-        for insurance_company, _, result_text in checklist:
+        for insurance_company, result_text in checklist:
             mail_text += f'\n{insurance_company} {result_text}'
 
         email_send('grepto@gmail.com', '[strahovki24.ru] Отвалилась страховая компания', mail_text)
-
-
-
-
-
-
-
-
-
-
-
