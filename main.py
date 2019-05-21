@@ -9,6 +9,10 @@ from email.header import Header
 
 
 def insurance_single_quote_get(insurance_company_id = 10):
+    script_dir = os.path.dirname(__file__)
+    request_json_file_name = 'request.json'
+    request_json_file_path = os.path.join(script_dir, request_json_file_name)
+
     start_date = datetime.date.today() + datetime.timedelta(5)
     end_date = start_date + datetime.timedelta(7)
     start_date = start_date.strftime('%Y-%m-%d')
@@ -16,7 +20,7 @@ def insurance_single_quote_get(insurance_company_id = 10):
 
     url = 'https://strahovki24.ru/TravelNew/insuranceSingleQuoteGet'
 
-    with open('request.json', 'r') as request_file:
+    with open(request_json_file_path, 'r') as request_file:
         data = json.load(request_file)
     data['startDate'] = start_date
     data['endDate'] = end_date
@@ -91,6 +95,8 @@ if __name__ == '__main__':
         15: 'Тинькофф Страхование',
     }
 
+    emails = ['konstantin.a.smetanin@bspb.ru', 'grepto@gmail.com']
+
     checklist = []
     for id, name in insurance_companies.items():
         is_ok, result_text = insurance_single_quote_get(id)
@@ -102,4 +108,4 @@ if __name__ == '__main__':
         for insurance_company, result_text in checklist:
             mail_text += f'\n{insurance_company} {result_text}'
 
-        email_send('grepto@gmail.com', '[strahovki24.ru] Отвалилась страховая компания', mail_text)
+        email_send(emails, '[strahovki24.ru] Отвалилась страховая компания', mail_text)
